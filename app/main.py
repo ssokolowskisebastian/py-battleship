@@ -1,12 +1,12 @@
 class Deck:
-    def __init__(self, row, column, is_alive=True):
+    def __init__(self, row: int, column: int, is_alive: bool = True) -> None:
         self.row = row
         self.column = column
         self.is_alive = is_alive
 
 
 class Ship:
-    def __init__(self, start, end, is_drowned=False):
+    def __init__(self, start: int, end: int, is_drowned: bool = False) -> None:
         self.is_drowned = is_drowned
         self.decks = []
 
@@ -14,19 +14,19 @@ class Ship:
         r2, c2 = end
 
         if r1 == r2:
-            for c in range(min(c1, c2), max(c1, c2) + 1):
-                self.decks.append(Deck(r1, c))
+            for col in range(min(c1, c2), max(c1, c2) + 1):
+                self.decks.append(Deck(r1, col))
         else:
-            for r in range(min(r1, r2), max(r1, r2) + 1):
-                self.decks.append(Deck(r, c1))
+            for row in range(min(r1, r2), max(r1, r2) + 1):
+                self.decks.append(Deck(row, c1))
 
-    def get_deck(self, row, column):
+    def get_deck(self, row: int, column: int) -> Deck:
         for deck in self.decks:
             if deck.row == row and deck.column == column:
                 return deck
         return None
 
-    def fire(self, row, column):
+    def fire(self, row: int, column: int) -> None:
         deck = self.get_deck(row, column)
         if deck is None or not deck.is_alive:
             return
@@ -38,7 +38,7 @@ class Ship:
 
 
 class Battleship:
-    def __init__(self, ships):
+    def __init__(self, ships: list) -> None:
         self.field = {}
 
         for start, end in ships:
