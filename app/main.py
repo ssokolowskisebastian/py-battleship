@@ -28,8 +28,6 @@ class Ship:
 
     def fire(self, row: int, column: int) -> None:
         deck = self.get_deck(row, column)
-        if deck is None or not deck.is_alive:
-            return
 
         deck.is_alive = False
 
@@ -47,7 +45,7 @@ class Battleship:
             for deck in ship.decks:
                 self.field[(deck.row, deck.column)] = ship
 
-    def fire(self, location: tuple):
+    def fire(self, location: tuple) -> str:
 
         if location not in self.field:
             return "Miss!"
